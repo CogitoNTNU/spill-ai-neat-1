@@ -1,2 +1,2 @@
 # spill-ai-neat-1
-Prosjekt gruppe som lager neat agent
+Prosjektgruppe som lager neat agent
