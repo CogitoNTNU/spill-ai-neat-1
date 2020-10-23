@@ -1,37 +1,53 @@
+# from cartpole import observation
+
+import gym
+import math
+import random
+env = gym.make('CartPole-v0')
 class Genome:
-    def __init__(self, nodes, edge):
-        self.nodes = nodes
-        self.edge = edge
+    def __init__(self, observation, edges, hidden_nodes, reward=0):
+        # Creating 4 inputnodes
+        self.input_nodes = [Node(i,observation[i], 0) for i in range(len(observation))]
+        # Creating 2 outputnodes
+        self.output_nodes = [Node(i,0,0) for i in range(2)]
+        self.hidden_nodes = hidden_nodes
+        self.edges = edges
+        self.reward = reward
 
-
-    def findBestNode():
-        nodeList=[]
-
-        outputnode_1 = Node(1,0,0)
-        outputnode_2 = Node(2,0,0)
-        nodeList.append(outputnode_1)
-        nodeList.append(outputnode_2)
-
-        for i in range(0, len(edge)-1):
-            if(Genome.edge[i].output.index == outputnode_1.index):
-                outputnode_1.nodeValue += edge[i].weight*edge[i].input.nodeValue
-            else:
-                outputnode_2.nodeValue += edge[i].weight*edge[i].input.nodeValue
-        if(nodeList[0].nodeValue > nodeList[1].nodeValue):
-            return nodeList[0].nodeValue
-        else:
-            return nodeList[1].nodeValue
-
-
-
+    def best_move(self):
+        for i in range(len(self.output_nodes)):
+            for j in range(len(self.edges)):
+                for k in range(len(self.edges[0])):
+                    # Setting value of outputnodes to weight*inputnode.value
+                    if self.edges[j][k].output == self.output_nodes[i].index:
+                        value_of_input_node = self.input_nodes[self.edges[j][k].input].value
+                        weight_of_edge = self.edges[j][k].weight
+                        self.output_nodes[i].value += value_of_input_node*weight_of_edge
+                        print(self.output_nodes[i].value)
+                    
+        # Returns best move
+        highest_value = 0
+        highest_index = 0
+        for i in range(len(self.output_nodes)):
+            # print(self.output_nodes[i].value)
+            if self.output_nodes[i].value > highest_value:
+                # print(self.output_nodes[i].value)
+                print(highest_value)
+                highest_value = self.output_nodes[i].value
+                highest_index = self.output_nodes[i].index
+        # Returns 1 or 0 which is the actions
+        return highest_index
     
+    def feed_observation(self,observation):
+        for i in range(len(observation)):
+            self.input_nodes[i].value = observation[i]
 # Nodes
 class Node:
-    def __init__(self, index, nodeValue, innov):
-        #self.node = node
+    def __init__(self, index, value, innov):
+        # The index of the node
         self.index = index
+        self.value = value
         self.innov = innov
-        self.nodeValue = nodeValue
 
 # Vertecies
 class Edge:
@@ -45,3 +61,36 @@ class Edge:
         self.enabled = enabled
         # Historic marking
         self.innov = innov
+
+
+def initial_generation(observation):
+    # Edges from all input nodes to all output_nodes
+    init_edges = [[Edge(i, j, random.randint(0,1), True, 0) for i in range(4)] for j in range(2)]
+    # No hidden nodes at the start
+    init_hidden_nodes = []
+    return Genome(observation, init_edges, init_hidden_nodes) 
+
+def cartpole_action(best_move):
+    env.render()
+    observation, reward, done, info = env.step(best_move)
+    return observation,reward,done,info
+
+def main():
+    # Initial generation. Making 50 agents
+    first_agents = [initial_generation([0,0,0,0]) for i in range(50)]
+    # print(first_agents[0].edges)
+    for i in range(1):
+        env.reset()
+        while True:
+            best_move = first_agents[i].best_move()
+            # print(best_move)           
+            observation,reward,done,info = cartpole_action(best_move)
+            first_agents[i].feed_observation(observation)
+            # Breaks if observation values are to high
+            if done:
+                env.reset()
+                break
+
+
+if __name__ == "__main__":
+    main()
