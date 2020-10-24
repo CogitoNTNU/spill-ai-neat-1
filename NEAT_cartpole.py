@@ -23,7 +23,7 @@ class Genome:
                         value_of_input_node = self.input_nodes[self.edges[j][k].input].value
                         weight_of_edge = self.edges[j][k].weight
                         self.output_nodes[i].value += value_of_input_node*weight_of_edge
-                        print(self.output_nodes[i].value)
+                        # print(self.output_nodes[i].value)
                     
         # Returns best move
         highest_value = 0
@@ -32,9 +32,10 @@ class Genome:
             # print(self.output_nodes[i].value)
             if self.output_nodes[i].value > highest_value:
                 # print(self.output_nodes[i].value)
-                print(highest_value)
+                # print(highest_value)
                 highest_value = self.output_nodes[i].value
                 highest_index = self.output_nodes[i].index
+                print(highest_index)
         # Returns 1 or 0 which is the actions
         return highest_index
     
@@ -79,7 +80,7 @@ def main():
     # Initial generation. Making 50 agents
     first_agents = [initial_generation([0,0,0,0]) for i in range(50)]
     # print(first_agents[0].edges)
-    for i in range(1):
+    for i in range(50):
         env.reset()
         while True:
             best_move = first_agents[i].best_move()
