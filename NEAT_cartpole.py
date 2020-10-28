@@ -42,6 +42,8 @@ class Genome:
     def feed_observation(self,observation):
         for i in range(len(observation)):
             self.input_nodes[i].value = observation[i]
+    
+    # def best_agent()
         
     # def mutation():
     
@@ -50,6 +52,8 @@ class Genome:
     # def add_hidden_node():
     
     # def add_edge():
+
+    # 
 
 # Nodes
 class Node:
@@ -101,6 +105,7 @@ def main():
             if done:
                 env.reset()
                 break
+        print(reward)
 
 
 if __name__ == "__main__":
