@@ -1,2 +1,5 @@
 # spill-ai-neat-1
-Prosjektgruppe som lager neat agent
+Projectgroup making NEAT AI agent
+
+Creating an AI Agent using NEAT (Evolutionary algorithms)
+
