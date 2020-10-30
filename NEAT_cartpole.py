@@ -1,5 +1,6 @@
 # from cartpole import observation
-import gym                    
+import gym 
+import numpy as np                
 import math
 import random
 env = gym.make('CartPole-v0')
@@ -23,16 +24,12 @@ class Genome:
                         value_of_input_node = self.input_nodes[self.edges[j][k].input].value
                         weight_of_edge = self.edges[j][k].weight
                         self.output_nodes[i].value += value_of_input_node*weight_of_edge
-                        # print(self.output_nodes[i].value)
                     
         # Returns best move
         highest_value = 0
         highest_index = 0
         for i in range(len(self.output_nodes)):
-            # print(self.output_nodes[i].value)
             if self.output_nodes[i].value > highest_value:
-                # print(self.output_nodes[i].value)
-                # print(highest_value)
                 print("Weight:", self.edges[0][0].weight)
                 highest_value = self.output_nodes[i].value
                 highest_index = self.output_nodes[i].index
@@ -42,18 +39,16 @@ class Genome:
     def feed_observation(self,observation):
         for i in range(len(observation)):
             self.input_nodes[i].value = observation[i]
-    
-    # def best_agent()
-        
+
     # def mutation():
+            # def add_hidden_node():
     
-    # def pair_best_genome()
+            # def add_edge():
+    
+    # def pair_genome(best_agents):
 
     # def add_hidden_node():
     
-    # def add_edge():
-
-    # 
 
 # Nodes
 class Node:
@@ -75,10 +70,31 @@ class Edge:
         self.enabled = enabled
         # Historic marking
         self.innov = innov
+    
+    # Paal
+    # def used_edges():
+        # Tuples of input-node to output-node
+
+
 
 # class Species():
 #     def __init__(self, genomes):
 #         self.specie = genomes
+
+    # Sank
+    # def sharing_function(genomes):
+        # For genome in genomes:
+            # Sjekker hvor mange som er innenfor treashold d
+                # D = 
+        # Returnere hvor mange genomes som er like innenfor verdien d
+
+    # Sank
+    # def change_reward():
+        # New reward = old reward/ (sharing_function(genomes))
+    
+    # Ivar kan se på det
+    # def pair_genome(best_agents):
+
 
 def initial_generation(observation):
     # Edges from all input nodes to all output_nodes
@@ -93,7 +109,8 @@ def cartpole_action(best_move):
     return observation,reward,done,info
 
 def main():
-    # Initial generation. Making 50 agents
+    # Sank - drittjobben
+    # Initial generation. Making 50 agent
     first_agents = [initial_generation([0,0,0,0]) for i in range(50)]
     for i in range(50):
         env.reset()
