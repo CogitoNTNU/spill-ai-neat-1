@@ -14,7 +14,6 @@ class Genome:
         #Matrix with edges
         self.edges = edges
         self.reward = reward
-
         #treger denne for species
         self.feed_observation = observation
 
@@ -79,12 +78,17 @@ class Edge:
         # Tuples of input-node to output-node
 
 
-
 class Species():
     def __init__(self, genomes):
         self.specie = genomes
     
     def sharing_function(self,genomes):
+        
+
+
+
+
+
         genomeList = []
         for genome in genomes:
             genomeList.append(genome.observation)
@@ -100,10 +104,10 @@ class Species():
         return equalGenomes
 
     def change_reward(self,genomes):
-        old_reward = 0
+        reward = 0
         for genome in genomes:
-            old_reward+=genome.reward
-        return genome.reward/(self.sharing_function(genomes))
+            reward+=genome.reward
+        return reward/(self.sharing_function(genomes))
     
     # Ivar kan se på det
     # def pair_genome(best_agents):
