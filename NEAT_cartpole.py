@@ -15,6 +15,9 @@ class Genome:
         self.edges = edges
         self.reward = reward
 
+        #treger denne for species
+        self.feed_observation = observation
+
     def best_move(self):
         for i in range(len(self.output_nodes)):
             for j in range(len(self.edges)):
@@ -84,13 +87,17 @@ class Species():
     def sharing_function(self,genomes):
         genomeList = []
         for genome in genomes:
-            genomeList.append
-            
-
+            genomeList.append(genome.observation)
+        equalGenomes = 0
+        for x in genomeList:
+            for y in genomeList:
+                if(x==y):
+                    equalGenomes+=1
         # For genome in genomes:
             # Sjekker hvor mange som er innenfor treashold d
                 # D = sum(genomes)???
         # Returnere hvor mange genomes som er like innenfor verdien d
+        return equalGenomes
 
     def change_reward(self,genomes):
         old_reward = 0
