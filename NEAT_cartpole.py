@@ -77,7 +77,7 @@ class Edge:
 
 
 
-# class Species():
+class Species():
 #     def __init__(self, genomes):
 #         self.specie = genomes
 
