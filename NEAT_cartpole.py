@@ -78,19 +78,25 @@ class Edge:
 
 
 class Species():
-#     def __init__(self, genomes):
-#         self.specie = genomes
+    def __init__(self, genomes):
+        self.specie = genomes
+    
+    def sharing_function(self,genomes):
+        genomeList = []
+        for genome in genomes:
+            genomeList.append
+            
 
-    # Sank
-    # def sharing_function(genomes):
         # For genome in genomes:
             # Sjekker hvor mange som er innenfor treashold d
-                # D = 
+                # D = sum(genomes)???
         # Returnere hvor mange genomes som er like innenfor verdien d
 
-    # Sank
-    # def change_reward():
-        # New reward = old reward/ (sharing_function(genomes))
+    def change_reward(self,genomes):
+        old_reward = 0
+        for genome in genomes:
+            old_reward+=genome.reward
+        return genome.reward/(self.sharing_function(genomes))
     
     # Ivar kan se på det
     # def pair_genome(best_agents):
