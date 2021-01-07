@@ -109,7 +109,6 @@ class Species():
             reward+=genome.reward
         return reward/(self.sharing_function(genomes))
     
-    # Ivar kan se på det
     # def pair_genome(best_agents):
 
 
@@ -126,7 +125,6 @@ def cartpole_action(best_move):
     return observation,reward,done,info
 
 def main():
-    # Sank - drittjobben
     # Initial generation. Making 50 agent
     first_agents = [initial_generation([0,0,0,0]) for i in range(50)]
     for i in range(50):
